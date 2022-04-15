@@ -6,8 +6,19 @@ import Video from "./Video";
 
 
 const socket = io.connect("http://localhost:3001");
-
+const ENDPOINT = "https://cli-auth.heroku.com/";
 function App() {
+  const [response, setResponse] = useState("");
+  useEffect(() => {
+  const socket = socketIOClient(ENDPOINT);
+  // console.log(socket)
+  socket.on("FromAPI", data => {
+  setResponse(data);
+  });
+  }, []);
+  // ....
+
+
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
